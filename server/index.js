@@ -3,15 +3,15 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import morgan from "morgan";
-import { errorHandler, routeNotFound } from "./middlewares/errorMiddlewaves.js";
+import { errorHandler, routeNotFound } from "./middleware/errorMiddleware.js";
 import routes from "./routes/index.js";
-import { dbConnection } from "./utils/index.js";
+import dbConnection from "./utils/connectDB.js";
 
 dotenv.config();
 
 dbConnection();
 
-const PORT = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
 const app = express();
 
@@ -34,4 +34,4 @@ app.use("/api", routes);
 app.use(routeNotFound);
 app.use(errorHandler);
 
-app.listen(PORT, () => console.log(`Server listening on ${PORT}`));
+app.listen(port, () => console.log(`Server listening on ${port}`));
